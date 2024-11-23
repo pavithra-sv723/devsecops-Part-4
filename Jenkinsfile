@@ -31,13 +31,6 @@ pipeline {
 	stage('Push') {
             steps {
                 script{
-			def creds = CredentialsProvider.lookupCredentials(
-                        StandardCredentials.class,
-                        Jenkins.get(),
-                        null,
-                        null
-                    )
-                    echo "Available Credentials: ${creds.collect { it.id }}"
                     docker.withRegistry('https://535002889690.dkr.ecr.us-east-2.amazonaws.com', 'ecr:us-east-2:aws-credentials') {
                     app.push("latest")
                     }
