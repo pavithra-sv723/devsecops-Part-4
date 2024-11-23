@@ -31,9 +31,9 @@ pipeline {
 	stage('Push') {
             steps {
                 script{
-			def creds = com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredentials(
-                        com.cloudbees.plugins.credentials.common.StandardCredentials.class,
-                        Jenkins.instance,
+			def creds = CredentialsProvider.lookupCredentials(
+                        StandardCredentials.class,
+                        Jenkins.get(),
                         null,
                         null
                     )
