@@ -31,6 +31,13 @@ pipeline {
 	stage('Push') {
             steps {
                 script{
+			def creds = com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredentials(
+                        com.cloudbees.plugins.credentials.common.StandardCredentials.class,
+                        Jenkins.instance,
+                        null,
+                        null
+                    )
+                    echo "Available Credentials: ${creds.collect { it.id }}"
                     docker.withRegistry('https://535002889690.dkr.ecr.us-east-2.amazonaws.com', 'ecr:us-east-2:aws-credentials') {
                     app.push("latest")
                     }
